@@ -1,8 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <!-- Modern Material You 3 Dark Theme Colors -->
+    
+    <!-- Primary Colors (Android Green) -->
+    <color name="md_theme_primary">#3DDC84</color>
+    <color name="md_theme_onPrimary">#000000</color>
+    <color name="md_theme_primaryContainer">#1B5E20</color>
+    <color name="md_theme_onPrimaryContainer">#C8E6C9</color>
+    
+    <!-- Secondary Colors (Light Android Green) -->
+    <color name="md_theme_secondary">#66BB6A</color>
+    <color name="md_theme_onSecondary">#000000</color>
+    <color name="md_theme_secondaryContainer">#2E7D32</color>
+    <color name="md_theme_onSecondaryContainer">#A5D6A7</color>
+    
+    <!-- Tertiary Colors (Dark Android Green) -->
+    <color name="md_theme_tertiary">#2E7D32</color>
+    <color name="md_theme_onTertiary">#FFFFFF</color>
+    <color name="md_theme_tertiaryContainer">#1B5E20</color>
+    <color name="md_theme_onTertiaryContainer">#A5D6A7</color>
+    
+    <!-- Error Colors -->
+    <color name="md_theme_error">#EF5350</color>
+    <color name="md_theme_onError">#FFFFFF</color>
+    <color name="md_theme_errorContainer">#C62828</color>
+    <color name="md_theme_onErrorContainer">#FFCDD2</color>
+    
+    <!-- Surface Colors (AMOLED Black) -->
+    <color name="md_theme_surface">#000000</color>
+    <color name="md_theme_onSurface">#E8F5E8</color>
+    <color name="md_theme_surfaceVariant">#1A1A1A</color>
+    <color name="md_theme_onSurfaceVariant">#B0B0B0</color>
+    
+    <!-- Surface Container Colors -->
+    <color name="md_theme_surfaceContainerHighest">#1E1E1E</color>
+    <color name="md_theme_surfaceContainerHigh">#141414</color>
+    <color name="md_theme_surfaceContainer">#0A0A0A</color>
+    <color name="md_theme_surfaceContainerLow">#050505</color>
+    <color name="md_theme_surfaceContainerLowest">#000000</color>
+    <color name="md_theme_surfaceBright">#1E1E1E</color>
+    <color name="md_theme_surfaceDim">#0A0A0A</color>
+    
+    <!-- Outline Colors -->
+    <color name="md_theme_outline">#757575</color>
+    <color name="md_theme_outlineVariant">#424242</color>
+    
+    <!-- Inverse Colors -->
+    <color name="md_theme_inverseSurface">#E8F5E8</color>
+    <color name="md_theme_inverseOnSurface">#1A1A1A</color>
+    <color name="md_theme_inversePrimary">#3DDC84</color>
+    <color name="md_theme_onSurfaceInverse">#1A1A1A</color>
+    
+    <!-- Other Colors -->
+    <color name="md_theme_surfaceTint">#3DDC84</color>
+    <color name="md_theme_shadow">#000000</color>
+    <color name="md_theme_scrim">#000000</color>
+    
+    <!-- Legacy Colors (for compatibility) -->
+    <color name="colorPrimary">#3DDC84</color>
+    <color name="colorPrimaryDark">#1B5E20</color>
+    <color name="colorAccent">#66BB6A</color>
     <!--
     <color name="primary_text">#FFFFFF</color>
     <color name="secondary_text">#CCCCCC</color>

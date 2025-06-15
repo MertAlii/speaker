@@ -10,6 +10,8 @@ import android.content.SharedPreferences.OnSharedPreferenceChangeListener
 import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Build
+import android.telephony.PhoneStateListener
+import android.telephony.TelephonyManager
 import androidx.lifecycle.MutableLiveData
 import androidx.preference.PreferenceManager
 import kotlin.math.ln
@@ -18,6 +20,8 @@ import kotlin.math.ln
 class Monitor(private var applicationContext: Context) {
 
     private var sharedPreferencesListener: OnSharedPreferenceChangeListener? = null
+    private var phoneStateListener: PhoneStateListener? = null
+    private var telephonyManager: TelephonyManager? = null
 
     var playing = MutableLiveData<Boolean>()
     var summary = MutableLiveData<List<String>?>()
@@ -26,11 +30,14 @@ class Monitor(private var applicationContext: Context) {
     private var sound: String = "brown"
     private var setVolume = 1.0   // percent
     private var triggerDevices = listOf<String>()
+    private var wasPlayingBeforeCall = false
+    private var shouldResumeAfterCall = false
+    private var continuousPlay = true  // Sürekli çalma özelliği
 
     private fun preferencesUpdated(prefs: SharedPreferences) {
         autoplay = prefs.getBoolean("autoplay", true)
         sound = prefs.getString("sound", "brown")!!
-        setVolume = prefs.getInt("volume", 10) / 10.0  // 1/1000 ths -> percent
+        setVolume = prefs.getInt("volume", 10) / 100.0  // 0-100 -> 0.0-1.0
 
         val selectedDevices = prefs.getStringSet("device_list", setOf<String>()).orEmpty()
         triggerDevices = selectedDevices.toList()
@@ -67,15 +74,24 @@ class Monitor(private var applicationContext: Context) {
             }
         }
 
-        if (listed.isNotEmpty()) {
-            //println("!!! CONNECTED: $listed !!! --> PLAY")
-            play()
+        // Sürekli çalma aktifse her zaman çal
+        if (continuousPlay) {
+            if (!isPlaying()) {
+                play()
+            }
         } else {
-            //println("!!! NOT-CONNECTED !!! --> STOP")
-            stop()
+            // Sürekli çalma kapalıysa sadece cihaz bağlıysa çal
+            if (listed.isNotEmpty()) {
+                if (!isPlaying()) {
+                    play()
+                }
+            } else {
+                if (isPlaying()) {
+                    stop()
+                }
+            }
         }
     }
-
 
     fun mainActivityResumed() {
         //println("MONITOR: mainActivityResumed")
@@ -118,9 +134,6 @@ class Monitor(private var applicationContext: Context) {
         }
     }
 
-
-
-
     // --- media player ---
 
     private var mediaPlayer: MediaPlayer? = null
@@ -128,24 +141,34 @@ class Monitor(private var applicationContext: Context) {
     fun mediaStart() {
         //println("MEDIA-START")
         synchronized (this) {
-            if (mediaPlayer == null) {
-                val res = when (sound) {
-                    "brown" -> R.raw.noise_brown
-                    else -> -1
-                }
+            try {
+                if (mediaPlayer == null) {
+                    val res = when (sound) {
+                        "brown" -> R.raw.noise_brown
+                        else -> -1
+                    }
 
-                if (res != -1) {
-                    mediaPlayer = MediaPlayer.create(applicationContext, res)
-                    mediaPlayer?.isLooping = true
+                    if (res != -1) {
+                        mediaPlayer = MediaPlayer.create(applicationContext, res)
+                        mediaPlayer?.isLooping = true
 
-                    val maxVolume = 100.0
-                    val volume = 1.0 - (ln(maxVolume - setVolume) / ln(maxVolume))
-                    mediaPlayer?.setVolume(volume.toFloat(), volume.toFloat())
+                        val maxVolume = 100.0
+                        val volume = 1.0 - (ln(maxVolume - setVolume) / ln(maxVolume))
+                        mediaPlayer?.setVolume(volume.toFloat(), volume.toFloat())
+                        
+                        // Set audio stream type to avoid conflicts with phone calls
+                        mediaPlayer?.setAudioStreamType(AudioManager.STREAM_MUSIC)
+                    }
                 }
-            }
-            if (mediaPlayer != null) {
-                mediaPlayer?.start()
-                playing.value = true
+                if (mediaPlayer != null) {
+                    mediaPlayer?.start()
+                    playing.value = true
+                }
+            } catch (e: Exception) {
+                // Handle any MediaPlayer errors gracefully
+                mediaPlayer?.release()
+                mediaPlayer = null
+                playing.value = false
             }
         }
     }
@@ -153,19 +176,89 @@ class Monitor(private var applicationContext: Context) {
     fun mediaStop() {
         synchronized(this) {
             //println("MEDIA-STOP")
-            if (mediaPlayer != null) {
-                //mediaPlayer?.pause()
-                mediaPlayer?.stop()
-                mediaPlayer?.release()
+            try {
+                if (mediaPlayer != null) {
+                    if (mediaPlayer?.isPlaying == true) {
+                        mediaPlayer?.stop()
+                    }
+                    mediaPlayer?.release()
+                    mediaPlayer = null
+                }
+                playing.value = false
+            } catch (e: Exception) {
+                // Handle any MediaPlayer errors gracefully
                 mediaPlayer = null
+                playing.value = false
             }
-            playing.value = false
         }
     }
 
     private fun isPlaying(): Boolean {
         synchronized (this) {
-            return mediaPlayer?.isPlaying == true
+            return try {
+                mediaPlayer?.isPlaying == true
+            } catch (e: Exception) {
+                false
+            }
+        }
+    }
+
+    // Phone call handling
+    private fun setupPhoneStateListener() {
+        try {
+            telephonyManager = applicationContext.getSystemService(Context.TELEPHONY_SERVICE) as TelephonyManager
+            
+            phoneStateListener = object : PhoneStateListener() {
+                override fun onCallStateChanged(state: Int, phoneNumber: String?) {
+                    when (state) {
+                        TelephonyManager.CALL_STATE_RINGING -> {
+                            // Gelen çağrı - ses seviyesini düşür ama çalmaya devam et
+                            if (isPlaying()) {
+                                wasPlayingBeforeCall = true
+                                shouldResumeAfterCall = true
+                                // Ses seviyesini düşür ama durdurma
+                                mediaPlayer?.setVolume(0.05f, 0.05f)
+                            }
+                        }
+                        TelephonyManager.CALL_STATE_OFFHOOK -> {
+                            // Çağrı aktif - ses seviyesini düşük tut ama çalmaya devam et
+                            if (isPlaying()) {
+                                wasPlayingBeforeCall = true
+                                shouldResumeAfterCall = true
+                                // Ses seviyesini düşük tut ama durdurma
+                                mediaPlayer?.setVolume(0.05f, 0.05f)
+                            }
+                        }
+                        TelephonyManager.CALL_STATE_IDLE -> {
+                            // Çağrı bitti - normal ses seviyesine dön
+                            if (shouldResumeAfterCall && wasPlayingBeforeCall) {
+                                wasPlayingBeforeCall = false
+                                shouldResumeAfterCall = false
+                                // Normal ses seviyesine dön
+                                val maxVolume = 100.0
+                                val volume = 1.0 - (ln(maxVolume - setVolume) / ln(maxVolume))
+                                mediaPlayer?.setVolume(volume.toFloat(), volume.toFloat())
+                            }
+                        }
+                    }
+                }
+            }
+            
+            telephonyManager?.listen(phoneStateListener, PhoneStateListener.LISTEN_CALL_STATE)
+        } catch (e: Exception) {
+            // Handle permission or other errors gracefully
+        }
+    }
+
+    private fun cleanupPhoneStateListener() {
+        try {
+            if (phoneStateListener != null && telephonyManager != null) {
+                telephonyManager?.listen(phoneStateListener, PhoneStateListener.LISTEN_NONE)
+                phoneStateListener = null
+                telephonyManager = null
+            }
+        } catch (e: Exception) {
+            // Handle cleanup errors gracefully
         }
     }
 
@@ -190,6 +283,18 @@ class Monitor(private var applicationContext: Context) {
             preferencesUpdated(sharedPreferences)
         }
         sharedPreferences.registerOnSharedPreferenceChangeListener(sharedPreferencesListener)
+        
+        // Setup phone state listener to handle call interruptions
+        setupPhoneStateListener()
     }
 
+    // Cleanup method to be called when the app is destroyed
+    fun cleanup() {
+        cleanupPhoneStateListener()
+        mediaStop()
+        sharedPreferencesListener?.let { listener ->
+            PreferenceManager.getDefaultSharedPreferences(applicationContext)
+                .unregisterOnSharedPreferenceChangeListener(listener)
+        }
+    }
 }

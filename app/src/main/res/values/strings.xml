@@ -1,51 +1,114 @@
 <resources>
     <string name="app_name">Speaker</string>
 
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Speaker\'a Hoş Geldiniz</string>
+    <string name="welcome_subtitle">Bluetooth kulaklıklarınızın bağlantı sorunlarını çözen akıllı ses uygulaması</string>
+    <string name="get_started">Başlayalım</string>
+    
+    <!-- Welcome Features -->
+    <string name="feature_bluetooth">Bluetooth cihazlarınızı otomatik algılar</string>
+    <string name="feature_sound">Sessiz arka plan sesi çalar</string>
+    <string name="feature_auto">Otomatik olarak çalışır ve durur</string>
+
+    <!-- Main Screen -->
+    <string name="status_ready">Hazır</string>
+    <string name="status_playing">Çalıyor</string>
+    <string name="status_connected">Bağlı</string>
+    <string name="start">Başlat</string>
+    <string name="stop">Durdur</string>
+    <string name="what_is_this">Uygulama Nedir?</string>
+    <string name="settings_title">Ayarlar</string>
+
+    <!-- Settings -->
+    <string name="autoplay_title">Otomatik Çalma</string>
+    <string name="select_bluetooth_devices">Bluetooth Cihazları Seç</string>
+    <string name="sound_type">Ses Türü</string>
+    <string name="brown_noise">Kahverengi Gürültü</string>
+    <string name="white_noise">Beyaz Gürültü</string>
+    <string name="pink_noise">Pembe Gürültü</string>
+    <string name="volume_control">Ses Seviyesi</string>
+    <string name="volume_percent">%1$d%%</string>
+    <string name="selected_devices">Seçilen Cihazlar</string>
+    <string name="no_devices_selected">Hiçbir cihaz seçilmedi</string>
+    <string name="notifications_enabled">Bildirimler</string>
+
+    <!-- About Section -->
+    <string name="about_title">Hakkında</string>
+    <string name="about_github">GitHub</string>
+    <string name="about_instagram">Instagram</string>
+    <string name="about_repository">Ana Depo</string>
+    <string name="about_production">An Alkan Production.</string>
+
+    <!-- Info Dialog -->
+    <string name="info_dialog_title">Bu Uygulama Nedir?</string>
+    <string name="info_dialog_message">Bu uygulama, belirli Bluetooth cihazlarına bağlandığınızda otomatik olarak sessiz bir arka plan sesi çalar.\n\nBu, bazı Bluetooth hoparlörlerde, sessizlik sonrasında hoparlörün çalınan bir sonraki sesin ilk kısmını kaçırması sorununu çözer. Bu durum özellikle konuşma gibi aralıklı seslerde belirgindir.\n\nBu hoparlörlerde sürekli olarak sessiz (neredeyse duyulamayan) bir ses çalmak, tamamen sessiz dönemleri önler ve bu sorunu çözer.</string>
+    <string name="info_dialog_ok">Anladım</string>
+
+    <!-- Permissions -->
+    <string name="permission_bluetooth_title">Bluetooth İzni</string>
+    <string name="permission_bluetooth_message">Bu uygulama Bluetooth cihazlarınızı algılamak için Bluetooth izni gerektirir.</string>
+    <string name="permission_phone_title">Telefon İzni</string>
+    <string name="permission_phone_message">Telefon çağrıları sırasında uygulamanın düzgün çalışması için telefon durumu izni gerektirir.</string>
+    <string name="permission_grant">İzin Ver</string>
+    <string name="permission_deny">Reddet</string>
+
+    <!-- Device Selection -->
+    <string name="device_selection_title">Bluetooth Cihazları Seç</string>
+    <string name="device_selection_message">Otomatik çalma için Bluetooth cihazlarınızı seçin</string>
+    <string name="device_selection_empty">Cihaz bulunamadı</string>
+    <string name="device_selection_select">Seç</string>
+    <string name="device_selection_cancel">İptal</string>
+    <string name="device_selection_select_all">Tümünü Seç</string>
+
     <string name="info_text">
-        "&lt;h3>What?&lt;/h3>\n"
-        "&lt;p>This app automatically plays a quiet background noise when you are connected to certain Bluetooth devices.&lt;/p>\n"
-        "&lt;h3>Why?&lt;/h3>\n"
-        "&lt;p>This fixes problems with some Bluetooth speakers where, following silence, the speaker misses the first part of the next sound that is played.  This is most apparent with intermittent sounds, such as speech.  For example, when listening to an audiobook, the first part of each sentence may often be missed.&lt;/p>\n"
-        "&lt;h3>How?&lt;/h3>\n"
-        "&lt;p>Playing a quiet (almost inaudible) noise on these speakers at all times prevents any periods of total silence and so avoids this problem.&lt;/p>\n"
-        "&lt;h3>When?&lt;/h3>\n"
-        "&lt;p>The sound will play automatically while you are connected to certain Bluetooth devices, as chosen in the settings.  Alternatively, you can temporarily play or pause the sound in the upper toolbar.&lt;/p>\n"
-        "&lt;p>The auto-play device list is currently:&lt;/p>\n"
+        "&lt;h3>Ne?&lt;/h3>\n"
+        "&lt;p>Bu uygulama, belirli Bluetooth cihazlarına bağlandığınızda otomatik olarak sessiz bir arka plan sesi çalar.&lt;/p>\n"
+        "&lt;h3>Neden?&lt;/h3>\n"
+        "&lt;p>Bu, bazı Bluetooth hoparlörlerde, sessizlik sonrasında hoparlörün çalınan bir sonraki sesin ilk kısmını kaçırması sorununu çözer. Bu durum özellikle konuşma gibi aralıklı seslerde belirgindir. Örneğin, sesli kitap dinlerken her cümlenin ilk kısmı sıklıkla kaçırılabilir.&lt;/p>\n"
+        "&lt;h3>Nasıl?&lt;/h3>\n"
+        "&lt;p>Bu hoparlörlerde sürekli olarak sessiz (neredeyse duyulamayan) bir ses çalmak, tamamen sessiz dönemleri önler ve bu sorunu çözer.&lt;/p>\n"
+        "&lt;h3>Ne Zaman?&lt;/h3>\n"
+        "&lt;p>Ses, ayarlarda seçilen belirli Bluetooth cihazlarına bağlıyken otomatik olarak çalacaktır. Alternatif olarak, üst araç çubuğunda sesi geçici olarak çalabilir veya duraklatabilirsiniz.&lt;/p>\n"
+        "&lt;p>Otomatik çalma cihaz listesi şu anda:&lt;/p>\n"
         "&lt;p>&lt;i>%1$s &lt;/i>&lt;/p>"
     </string>
 
-    <string name="action_play">Play</string>
-    <string name="action_pause">Pause</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_play">Çal</string>
+    <string name="action_pause">Duraklat</string>
+    <string name="action_settings">Ayarlar</string>
 
     <string name="notification_title">Speaker</string>
-    <string name="notification_message">Background sound playing</string>
-    <string name="notification_ticker_text">Chosen Bluetooth speaker connected: background sound playing.</string>
+    <string name="notification_message">Arka plan sesi çalıyor</string>
+    <string name="notification_ticker_text">Seçilen Bluetooth hoparlör bağlandı: arka plan sesi çalıyor.</string>
 
-    <string name="backgroundsound_description">Background sound player for Speaker App</string>
-    <string name="title_activity_settings">Speaker Settings</string>
+    <string name="backgroundsound_description">Speaker Uygulaması için arka plan ses çaları</string>
+    <string name="title_activity_settings">Speaker Ayarları</string>
 
     <!-- Preference Section: Autoplay -->
-    <string name="devices_header">Autoplay</string>
+    <string name="devices_header">Otomatik Çalma</string>
 
     <!-- Autoplay Preferences -->
-    <string name="autoplay_title">Enable Autoplay</string>
-    <string name="autoplay_on">Automatically play background sound when attached to selected devices.</string>
-    <string name="autoplay_off">Never automatically play background sound.</string>
+    <string name="autoplay_on">Seçili cihazlara bağlandığında arka plan sesini otomatik olarak çal.</string>
+    <string name="autoplay_off">Arka plan sesini asla otomatik olarak çalma.</string>
 
     <!-- Device List Preferences -->
-    <string name="device_list_title">Autoplay on Bluetooth Devices</string>
-    <string name="device_list_summary">⚠️ (none)\n→ Never automatically play background sound.</string>
-    <string name="device_list_dialog_title">Connected Device Autoplay</string>
+    <string name="device_list_title">Bluetooth Cihazlarında Otomatik Çalma</string>
+    <string name="device_list_summary">⚠️ (hiçbiri)\n→ Arka plan sesini asla otomatik olarak çalma.</string>
+    <string name="device_list_dialog_title">Bağlı Cihaz Otomatik Çalması</string>
 
     <!-- Preference Section: Background Sound -->
-    <string name="system_header">Background Sound</string>
+    <string name="system_header">Arka Plan Sesi</string>
 
     <!-- Sound Preferences -->
-    <string name="sound_title">Background Sound Type</string>
+    <string name="sound_title">Arka Plan Ses Türü</string>
 
     <!-- Volume Preferences -->
-    <string name="volume_title">Volume</string>
+    <string name="volume_title">Ses Seviyesi</string>
     <string name="volume_summary">1/1000ths (= 0-10%)</string>
+
+    <!-- Language -->
+    <string name="language_turkish">Türkçe</string>
+    <string name="language_english">English</string>
 
 </resources>

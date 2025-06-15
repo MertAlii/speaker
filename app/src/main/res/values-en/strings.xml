@@ -1,0 +1,114 @@
+<resources>
+    <string name="app_name">Speaker</string>
+
+    <!-- Welcome Screen -->
+    <string name="welcome_title">Welcome to Speaker</string>
+    <string name="welcome_subtitle">Smart audio app that solves Bluetooth headphone connection issues</string>
+    <string name="get_started">Get Started</string>
+    
+    <!-- Welcome Features -->
+    <string name="feature_bluetooth">Automatically detects your Bluetooth devices</string>
+    <string name="feature_sound">Plays silent background sound</string>
+    <string name="feature_auto">Automatically starts and stops</string>
+
+    <!-- Main Screen -->
+    <string name="status_ready">Ready</string>
+    <string name="status_playing">Playing</string>
+    <string name="status_connected">Connected</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="what_is_this">What is this App?</string>
+    <string name="settings_title">Settings</string>
+
+    <!-- Settings -->
+    <string name="autoplay_title">Auto Play</string>
+    <string name="select_bluetooth_devices">Select Bluetooth Devices</string>
+    <string name="sound_type">Sound Type</string>
+    <string name="brown_noise">Brown Noise</string>
+    <string name="white_noise">White Noise</string>
+    <string name="pink_noise">Pink Noise</string>
+    <string name="volume_control">Volume Level</string>
+    <string name="volume_percent">%1$d%%</string>
+    <string name="selected_devices">Selected Devices</string>
+    <string name="no_devices_selected">No devices selected</string>
+    <string name="notifications_enabled">Notifications</string>
+
+    <!-- About Section -->
+    <string name="about_title">About</string>
+    <string name="about_github">GitHub</string>
+    <string name="about_instagram">Instagram</string>
+    <string name="about_repository">Main Repository</string>
+    <string name="about_production">An Alkan Production.</string>
+
+    <!-- Info Dialog -->
+    <string name="info_dialog_title">What is this App?</string>
+    <string name="info_dialog_message">This app automatically plays silent background sound when connected to certain Bluetooth devices.\n\nThis solves the problem where some Bluetooth speakers miss the first part of the next sound played after silence. This issue is particularly noticeable with intermittent sounds like speech.\n\nPlaying continuously silent (almost inaudible) sound in these speakers prevents completely silent periods and solves this problem.</string>
+    <string name="info_dialog_ok">I Understand</string>
+
+    <!-- Permissions -->
+    <string name="permission_bluetooth_title">Bluetooth Permission</string>
+    <string name="permission_bluetooth_message">This app requires Bluetooth permission to detect your devices.</string>
+    <string name="permission_phone_title">Phone Permission</string>
+    <string name="permission_phone_message">Phone state permission is required for the app to work properly during phone calls.</string>
+    <string name="permission_grant">Grant</string>
+    <string name="permission_deny">Deny</string>
+
+    <!-- Device Selection -->
+    <string name="device_selection_title">Select Bluetooth Devices</string>
+    <string name="device_selection_message">Select your Bluetooth devices for auto play</string>
+    <string name="device_selection_empty">No devices found</string>
+    <string name="device_selection_select">Select</string>
+    <string name="device_selection_cancel">Cancel</string>
+    <string name="device_selection_select_all">Select All</string>
+
+    <!-- Language -->
+    <string name="language_turkish">Turkish</string>
+    <string name="language_english">English</string>
+
+    <string name="info_text">
+        "&lt;h3>What?&lt;/h3>\n"
+        "&lt;p>This app automatically plays silent background sound when connected to certain Bluetooth devices.&lt;/p>\n"
+        "&lt;h3>Why?&lt;/h3>\n"
+        "&lt;p>This solves the problem where some Bluetooth speakers miss the first part of the next sound played after silence. This issue is particularly noticeable with intermittent sounds like speech. For example, when listening to audiobooks, the first part of each sentence is often missed.&lt;/p>\n"
+        "&lt;h3>How?&lt;/h3>\n"
+        "&lt;p>Playing continuously silent (almost inaudible) sound in these speakers prevents completely silent periods and solves this problem.&lt;/p>\n"
+        "&lt;h3>When?&lt;/h3>\n"
+        "&lt;p>The sound will automatically play when connected to selected Bluetooth devices in settings. Alternatively, you can temporarily play or pause the sound in the top toolbar.&lt;/p>\n"
+        "&lt;p>The current auto-play device list is:&lt;/p>\n"
+        "&lt;p>&lt;i>%1$s &lt;/i>&lt;/p>"
+    </string>
+
+    <string name="action_play">Play</string>
+    <string name="action_pause">Pause</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="notification_title">Speaker</string>
+    <string name="notification_message">Background sound is playing</string>
+    <string name="notification_ticker_text">Selected Bluetooth speaker connected: background sound is playing.</string>
+
+    <string name="backgroundsound_description">Background sound player for Speaker App</string>
+    <string name="title_activity_settings">Speaker Settings</string>
+
+    <!-- Preference Section: Autoplay -->
+    <string name="devices_header">Auto Play</string>
+
+    <!-- Autoplay Preferences -->
+    <string name="autoplay_on">Automatically play background sound when connected to selected devices.</string>
+    <string name="autoplay_off">Never automatically play background sound.</string>
+
+    <!-- Device List Preferences -->
+    <string name="device_list_title">Auto Play on Bluetooth Devices</string>
+    <string name="device_list_summary">⚠️ (none)\n→ Never automatically play background sound.</string>
+    <string name="device_list_dialog_title">Connected Device Auto Play</string>
+
+    <!-- Preference Section: Background Sound -->
+    <string name="system_header">Background Sound</string>
+
+    <!-- Sound Preferences -->
+    <string name="sound_title">Background Sound Type</string>
+
+    <!-- Volume Preferences -->
+    <string name="volume_title">Volume Level</string>
+    <string name="volume_summary">1/1000ths (= 0-10%)</string>
+
+</resources> 
